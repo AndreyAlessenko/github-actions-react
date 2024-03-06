@@ -1,4 +1,4 @@
-name: Test React App
+name: Deploy React App
 on: push
 jobs:
   test_my_app:
@@ -10,4 +10,23 @@ jobs:
         run: npm ci
       - name: Test app
         run: npm run test
-
+  lint:
+    runs-on: windows-latest
+    steps:
+      - name: Get repository code
+        uses: actions/checkout@v4
+      - name: Install dependencies
+        run: npm ci
+      - name: Lint app
+        run: npm run lint
+  build_app:
+    runs-on: windows-latest
+    steps:
+      - name: Get repository code
+        uses: actions/checkout@v4
+      - name: Install dependencies
+        run: npm ci
+      - name: Build app
+        run: npm run build
+      - name: Deploy
+        run: echo Deploying...
